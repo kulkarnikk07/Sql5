@@ -28,15 +28,15 @@ order by start_date;
 -- 2 Problem 2 : Student Report By Geography		(https://leetcode.com/problems/students-report-by-geography/ )
 
 with first as(
-select name as 'America',dense_rank() over (order by name) as rnk from Student where continent = 'America'
+select name as 'America',row_number() over (order by name) as rnk from Student where continent = 'America'
 ),
     
 second as(    
-select name as 'Asia', dense_rank() over (order by name) as rnk from Student where continent = 'Asia'
+select name as 'Asia', row_number() over (order by name) as rnk from Student where continent = 'Asia'
 ),
     
 third as(    
-select name as 'Europe', dense_rank() over (order by name) as rnk from Student where continent = 'Europe'
+select name as 'Europe', row_number() over (order by name) as rnk from Student where continent = 'Europe'
 ) 
 
 
@@ -47,7 +47,6 @@ on first.rnk = second.rnk
 left join third
 on second.rnk = third.rnk
 ;
-
 
 -- 3 Problem 3 : Average Salary Department vs Company		(https://leetcode.com/problems/average-salary-departments-vs-company/solution/ )
 
